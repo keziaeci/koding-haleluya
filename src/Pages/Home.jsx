@@ -31,7 +31,8 @@ export const Home = () => {
     return (
         <>
             <div className='flex justify-center min-w-full m-0 p-0'>
-                <div className='w-[500px] min-h-screen bg-gray-950'>
+                {/* <div className='w-[500px] min-h-screen bg-gray-950'> */}
+                <div className='w-[500px] min-h-screen'>
                     {/* <Avatar sx={{ bgcolor: deepOrange[500] }}>N</Avatar> */}
                     <div className='p-3'>
                         <Avatar>H</Avatar>
@@ -39,7 +40,7 @@ export const Home = () => {
 
 
                     <div className='flex m-5'>
-                        <h1 className='text-slate-400 text-3xl font-black'>Kitab-Ku</h1>
+                        <h1 className='text-white text-3xl font-black'>Kitab-Ku</h1>
                     </div>
 
                     <div className='flex w-full'>
@@ -47,16 +48,28 @@ export const Home = () => {
                             <h1>Loding</h1>
                         ) : (
 
-                        <div className='flex flex-wrap justify-center gap-2 lg:mx-4 my-2'>
+                        <div className='flex flex-col w-full items-center gap-2 lg:m-4 m-4'>
                             {datas.map((data) => 
-                                <Link  key={data.id} to={`/kitab/${data.id}`}>
-                                    <div className="hover:scale-90 duration-300 card w-80 lg:w-60 bg-gray-900 shadow-xl">
-                                        <div className="card-body">
-                                            <h2 className="card-title text-white">{data.name}</h2>
-                                            <p>{data.nameLong}</p>
-                                        </div>
-                                    </div>
-                                </Link>
+                                <Box className='w-full'>
+                                    <Card asChild>
+                                        <Link  key={data.id} to={`/kitab/${data.id}`}>
+                                            <Text as="div" size="2" weight="bold">
+                                                {data.name}
+                                            </Text>
+                                            <Text as="div" color="gray" size="2">
+                                                {data.nameLong}
+                                            </Text>
+                                        </Link>
+                                    </Card>
+                                </Box>
+                        
+                                //     <div className="hover:scale-90 duration-300 card outline-1">
+                                //         <div className="card-body">
+                                //             <h2 className="card-title text-white">{data.name}</h2>
+                                //             <p className='text-gray-400'>{data.nameLong}</p>
+                                //         </div>
+                                //     </div>
+                                // </Link>
                                 )}
                         </div>
                         // <div className='flex'>
