@@ -2,10 +2,11 @@ import React, { useEffect,useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { Avatar } from '@mui/material'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import { Box, Card, Text } from '@radix-ui/themes'
 
 export const Home = () => {
 
-    const [data, setData] = useState([])
+    const [datas, setData] = useState([])
     const [load, setLoad] = useState(false)
 
 
@@ -21,6 +22,7 @@ export const Home = () => {
             const { data } = await response.json()
             setData(data)
             setLoad(false)
+            console.table(datas);
         }
         
         getBooks()
@@ -28,34 +30,51 @@ export const Home = () => {
     
     return (
         <>
-        <div className='flex justify-center min-w-full m-0 p-0'>
-            <div className='w-[500px] min-h-screen bg-gray-950'>
-                {/* <Avatar sx={{ bgcolor: deepOrange[500] }}>N</Avatar> */}
-                <div className='p-3'>
-                    <Avatar>H</Avatar>
-                </div>
+            <div className='flex justify-center min-w-full m-0 p-0'>
+                <div className='w-[500px] min-h-screen bg-gray-950'>
+                    {/* <Avatar sx={{ bgcolor: deepOrange[500] }}>N</Avatar> */}
+                    <div className='p-3'>
+                        <Avatar>H</Avatar>
+                    </div>
 
 
-                <div className='flex m-5'>
-                    <h1 className='text-slate-400 text-3xl font-black'>Kitab-Ku</h1>
+                    <div className='flex m-5'>
+                        <h1 className='text-slate-400 text-3xl font-black'>Kitab-Ku</h1>
+                    </div>
 
-                <div>
-                    
-                </div>
-                    <Swiper
-                        spaceBetween={50}
-                        slidesPerView={3}
-                        onSlideChange={() => console.log('slide change')}
-                        onSwiper={(swiper) => console.log(swiper)}
-                    >
-                        <SwiperSlide>Slide 1</SwiperSlide>
-                        <SwiperSlide>Slide 2</SwiperSlide>
-                        <SwiperSlide>Slide 3</SwiperSlide>
-                        <SwiperSlide>Slide 4</SwiperSlide>
-                    </Swiper>
+                    <div className='flex w-full'>
+                        {load ? (
+                            <h1>Loding</h1>
+                        ) : (
+
+                        <div className='flex flex-wrap justify-center gap-2 lg:mx-4 my-2'>
+                            {datas.map((data) => 
+                                <Link  key={data.id} to={`/kitab/${data.id}`}>
+                                    <div className="hover:scale-90 duration-300 card w-80 lg:w-60 bg-gray-900 shadow-xl">
+                                        <div className="card-body">
+                                            <h2 className="card-title text-white">{data.name}</h2>
+                                            <p>{data.nameLong}</p>
+                                        </div>
+                                    </div>
+                                </Link>
+                                )}
+                        </div>
+                        // <div className='flex'>
+                        //     {datas.map((data) => {
+                        //             console.table(data.id);
+                        //         <div key={data.id}>
+                        //             <h1 className='text-white'>{data.abbreviation}</h1>
+                        //             <p className='text-white'>{data.name}</p>
+                        //             <p className='text-white'>{data.nameLong}</p>
+                        //         </div>
+                        //     })}
+                        // </div>
+
+                        ) }
+                    </div>
+
                 </div>
             </div>
-        </div>
 
         </>
     )
