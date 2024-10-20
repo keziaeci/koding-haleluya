@@ -2,7 +2,7 @@ import React, { useEffect,useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { Avatar } from '@mui/material'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Box, Card, Text, Heading } from '@radix-ui/themes'
+import { Box, Card, Text, Heading,Spinner } from '@radix-ui/themes'
 
 export const Home = () => {
 
@@ -46,7 +46,9 @@ export const Home = () => {
 
                     <div className='flex w-full'>
                         {load ? (
-                            <h1>Loding</h1>
+                            <div className='flex  w-full  m-4'>
+                                <Spinner />
+                            </div>
                         ) : (
 
                         <div className='flex flex-col w-full items-center gap-2 lg:m-4 m-4'>

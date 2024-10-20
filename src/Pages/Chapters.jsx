@@ -1,6 +1,6 @@
 import React,  { useEffect,useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { Box, Card, Text } from '@radix-ui/themes'
+import { Box, Card, Text,Spinner } from '@radix-ui/themes'
 
 export const Chapters = () => {
     const { id } = useParams()
@@ -33,7 +33,9 @@ export const Chapters = () => {
             <div className='flex justify-center min-w-full m-0 p-0'>
                 <div className='flex w-full'>
                 {load ? (
-                    <h1>Loding</h1>
+                    <div className='flex  w-full  m-4'>
+                        <Spinner />
+                    </div>
                     ) : (
 
                     <div className='flex flex-col w-full items-center gap-2 m-5'>
