@@ -2,7 +2,7 @@ import React, { useEffect,useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { Avatar } from '@mui/material'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Box, Card, Text } from '@radix-ui/themes'
+import { Box, Card, Text, Heading } from '@radix-ui/themes'
 
 export const Home = () => {
 
@@ -13,7 +13,7 @@ export const Home = () => {
     useEffect(() => {
         const getBooks = async () => {
             setLoad(true)
-            const response = await fetch('https://api.scripture.api.bible/v1/bibles/2dd568eeff29fb3c-02/books', {
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/books`, {
                 headers : {
                     'api-key' : import.meta.env.VITE_API_KEY
                 }
@@ -40,7 +40,8 @@ export const Home = () => {
 
 
                     <div className='flex m-5'>
-                        <h1 className='text-white text-3xl font-black'>Kitab-Ku</h1>
+                        <Heading>Kitab-Ku</Heading>
+                        {/* <h1 className='text-white text-3xl font-black'>Kitab-Ku</h1> */}
                     </div>
 
                     <div className='flex w-full'>
@@ -50,9 +51,9 @@ export const Home = () => {
 
                         <div className='flex flex-col w-full items-center gap-2 lg:m-4 m-4'>
                             {datas.map((data) => 
-                                <Box className='w-full'>
+                                <Box className='w-full'  key={data.id}>
                                     <Card asChild>
-                                        <Link  key={data.id} to={`/kitab/${data.id}`}>
+                                        <Link  to={`/kitab/${data.id}`}>
                                             <Text as="div" size="2" weight="bold">
                                                 {data.name}
                                             </Text>
